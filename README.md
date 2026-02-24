@@ -34,6 +34,12 @@ Pre built images are available to run, with arm/multi-arch support, and baked in
 Refer to the core/config.py file for a full list of variables which can be managed via the environment
 
 ```bash
+# PyTorch for Intel XPU
+docker build -t kokoro-fastapi-xpu -f docker/xpu/Dockerfile .
+docker run -itd --privileged -p 8001:8880 kokoro-fastapi-xpu:latest
+```
+
+```bash
 # the `latest` tag can be used, though it may have some unexpected bonus features which impact stability.
  Named versions should be pinned for your regular usage.
  Feedback/testing is always welcome

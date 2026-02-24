@@ -43,6 +43,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+xpu = ["torch==2.8.0+xpu", "pytorch-triton-xpu"]
 gpu = ["torch==2.8.0+cu129"]
 cpu = ["torch==2.8.0"]
 rocm = [
@@ -61,6 +62,7 @@ test = [
 [tool.uv]
 conflicts = [
     [
+	{ extra = "xpu" },
         { extra = "cpu" },
         { extra = "gpu" },
         { extra = "rocm" },
@@ -72,13 +74,23 @@ override-dependencies = [
 
 [tool.uv.sources]
 torch = [
+    { index = "pytorch-xpu", extra = "xpu" },
     { index = "pytorch-cpu", extra = "cpu" },
     { index = "pytorch-cuda", extra = "gpu" },
     { index = "pytorch-rocm", extra = "rocm" },
 ]
+
+pytorch-triton-xpu = [
+    { index = "pytorch-xpu", extra = "xpu" },
+]
 pytorch-triton-rocm = [
     { index = "pytorch-rocm", extra = "rocm" },
 ]
+
+[[tool.uv.index]]
+name = "pytorch-xpu"
+url = "https://download.pytorch.org/whl/xpu"
+explicit = true
 
 [[tool.uv.index]]
 name = "pytorch-cpu"

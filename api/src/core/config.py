@@ -80,6 +80,8 @@ class Settings(BaseSettings):
             return "mps"
         elif torch.cuda.is_available():
             return "cuda"
+        elif torch.xpu.is_available():
+            return "xpu"
         return "cpu"
 
 
